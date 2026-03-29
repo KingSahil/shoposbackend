@@ -1,0 +1,592 @@
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:38:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:60:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:327:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+WhatsApp menu sync failed because Firebase auth is not working (auth/invalid-credential).
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 53488
+   Stop the other process before starting this one.
+Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 76
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:49:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:71:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:338:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+WhatsApp menu sync failed because Firebase auth is not working (auth/invalid-credential).
+⚠️ Recovered stale process lock file.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:49:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:71:19)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:400:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+Bot status sync skipped because Firebase auth failed (auth/invalid-credential).
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:50:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:76:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:343:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+WhatsApp menu sync failed because Firebase auth is not working (auth/invalid-credential).
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 18624
+   Stop the other process before starting this one.
+Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 76
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:50:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:83:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:350:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+WhatsApp menu sync failed because Firebase auth is not working (auth/invalid-credential).
+⚠️ Recovered stale process lock file.
+Bot status sync skipped because Firebase auth failed (auth/invalid-credential).
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:50:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:83:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:353:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+Using inferred Firestore userId (0UWSm17Ia5Xb3JSpbAEyEVUuIwJ3) without Firebase Auth because sign-in failed (auth/invalid-credential).
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:102:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:135:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:405:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+Using inferred Firestore userId (0UWSm17Ia5Xb3JSpbAEyEVUuIwJ3) without Firebase Auth because sign-in failed (auth/invalid-credential).
+⚠️ Recovered stale process lock file.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:102:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:135:19)
+    at async fetchMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:403:20)
+    at async refreshMenuFromFirebase (file:///C:/projects/shopos/kiranabot/src/menu.js:15:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+Using inferred Firestore userId (0UWSm17Ia5Xb3JSpbAEyEVUuIwJ3) without Firebase Auth because sign-in failed (auth/invalid-credential).
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 87148
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/too-many-requests).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:102:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:135:19)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:426:20) {
+  code: 'auth/too-many-requests',
+  customData: {}
+}
+Using inferred Firestore userId (0UWSm17Ia5Xb3JSpbAEyEVUuIwJ3) without Firebase Auth because sign-in failed (auth/too-many-requests).
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 92756
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/too-many-requests).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:102:5)
+    at async resolveStoreUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:135:19)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:426:20) {
+  code: 'auth/too-many-requests',
+  customData: {}
+}
+Using inferred Firestore userId (0UWSm17Ia5Xb3JSpbAEyEVUuIwJ3) without Firebase Auth because sign-in failed (auth/too-many-requests).
+file:///C:/projects/shopos/kiranabot/src/stages/1.js:1
+import { menu, refreshMenuFromFirebase, formatMenuMessage } from '../menu.js';
+                                        ^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'formatMenuMessage'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/stages/1.js:1
+import { menu, refreshMenuFromFirebase, formatMenuMessage } from '../menu.js';
+                                        ^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'formatMenuMessage'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\projects\shopos\kiranabot\src\utils.js' imported from C:\projects\shopos\kiranabot\src\stages\2.js
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:712:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:729:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:758:52)
+    at #resolve (node:internal/modules/esm/loader:694:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:614:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/projects/shopos/kiranabot/src/utils.js'
+}
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/stages/1.js:1
+import { menu, refreshMenuFromFirebase, formatMenuMessage } from '../menu.js';
+                                        ^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'formatMenuMessage'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\projects\shopos\kiranabot\src\stages\1.js' imported from C:\projects\shopos\kiranabot\src\stages\index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:712:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:729:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:758:52)
+    at #resolve (node:internal/modules/esm/loader:694:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:614:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/projects/shopos/kiranabot/src/stages/1.js'
+}
+
+Node.js v25.2.1
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 93600
+   Stop the other process before starting this one.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 69896
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 32876
+   Stop the other process before starting this one.
+file:///C:/projects/shopos/kiranabot/src/firebase_client.js:329
+export async function fetchMenuFromFirebase() {
+       ^
+
+SyntaxError: Identifier 'fetchMenuFromFirebase' has already been declared
+    at compileSourceTextModule (node:internal/modules/esm/utils:305:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:111:18)
+    at #translate (node:internal/modules/esm/loader:467:20)
+    at afterLoad (node:internal/modules/esm/loader:523:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:528:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:565:36)
+    at afterResolve (node:internal/modules/esm/loader:618:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:624:12)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17)
+
+Node.js v25.2.1
+⚠️ Recovered stale process lock file.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 4904
+   Stop the other process before starting this one.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 54484
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+⚠️ Recovered stale process lock file.
+file:///C:/projects/shopos/kiranabot/src/nlp/index.js:89
+      }
+      ^
+
+SyntaxError: Missing catch or finally after try
+    at compileSourceTextModule (node:internal/modules/esm/utils:305:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:111:18)
+    at #translate (node:internal/modules/esm/loader:467:20)
+    at afterLoad (node:internal/modules/esm/loader:523:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:528:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:565:36)
+    at afterResolve (node:internal/modules/esm/loader:618:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:624:12)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17)
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/nlp/index.js:89
+      }
+      ^
+
+SyntaxError: Missing catch or finally after try
+    at compileSourceTextModule (node:internal/modules/esm/utils:305:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:111:18)
+    at #translate (node:internal/modules/esm/loader:467:20)
+    at afterLoad (node:internal/modules/esm/loader:523:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:528:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:565:36)
+    at afterResolve (node:internal/modules/esm/loader:618:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:624:12)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17)
+
+Node.js v25.2.1
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 119412
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 20264
+   Stop the other process before starting this one.
+file:///C:/projects/shopos/kiranabot/src/stages/1.js:1
+import { menu } from '../menu.js';
+         ^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'menu'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/stages/1.js:1
+import { menu } from '../menu.js';
+         ^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'menu'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/nlp/parser.js:1
+import { menu } from '../menu.js';
+         ^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'menu'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/nlp/parser.js:1
+import { menu } from '../menu.js';
+         ^^^^
+SyntaxError: The requested module '../menu.js' does not provide an export named 'menu'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:302:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:405:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 66920
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+⚠️ Recovered stale process lock file.
+⚠️ Recovered stale process lock file.
+(node:50516) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 exit listeners added to [Bus]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+⚠️ Recovered stale process lock file.
+⚠️ Recovered stale process lock file.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 121664
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+⚠️ Recovered stale process lock file.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 97056
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 121748
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:34:5)
+    at async getMerchantUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:170:3)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:375:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:34:5)
+    at async getMerchantUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:170:3)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:393:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:34:5)
+    at async getMerchantUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:170:3)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:401:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 76772
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+Firebase authentication failed: FirebaseError: Firebase: Error (auth/invalid-credential).
+    at createErrorInternal (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:499:41)
+    at _fail (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:474:11)
+    at _performFetchWithErrorHandling (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:961:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async _performSignInRequest (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:976:28)
+    at async _signInWithCredential (file:///C:/projects/shopos/kiranabot/node_modules/@firebase/auth/dist/node-esm/totp-ed01b91b.js:5695:22)
+    at async authenticateFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:34:5)
+    at async getMerchantUserId (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:170:3)
+    at async updateBotStatusInFirebase (file:///C:/projects/shopos/kiranabot/src/firebase_client.js:399:20) {
+  code: 'auth/invalid-credential',
+  customData: {}
+}
+⚠️ Recovered stale process lock file.
+❌ Firebase authentication failed for sahilgupta1750@gmail.com: Firebase: Error (auth/invalid-credential).
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 68628
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+file:///C:/projects/shopos/kiranabot/src/firebase_client.js:272
+export async function cancelLastOrderFromFirebase(phone) {
+       ^
+
+SyntaxError: Identifier 'cancelLastOrderFromFirebase' has already been declared
+    at compileSourceTextModule (node:internal/modules/esm/utils:305:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:111:18)
+    at #translate (node:internal/modules/esm/loader:467:20)
+    at afterLoad (node:internal/modules/esm/loader:523:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:528:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:565:36)
+    at afterResolve (node:internal/modules/esm/loader:618:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:624:12)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17)
+
+Node.js v25.2.1
+file:///C:/projects/shopos/kiranabot/src/firebase_client.js:242
+export async function cancelLastOrderFromFirebase(phone) {
+       ^
+
+SyntaxError: Identifier 'cancelLastOrderFromFirebase' has already been declared
+    at compileSourceTextModule (node:internal/modules/esm/utils:305:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:111:18)
+    at #translate (node:internal/modules/esm/loader:467:20)
+    at afterLoad (node:internal/modules/esm/loader:523:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:528:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:565:36)
+    at afterResolve (node:internal/modules/esm/loader:618:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:624:12)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17)
+
+Node.js v25.2.1
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 94940
+   Stop the other process before starting this one.
+file:///C:/projects/shopos/kiranabot/src/server.js:24
+const AUTH_PATH = resolve(__dirname, "../tokens/session-name");
+                          ^
+
+ReferenceError: Cannot access '__dirname' before initialization
+    at file:///C:/projects/shopos/kiranabot/src/server.js:24:27
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v25.2.1
+🚫 Non-recoverable disconnect detected.
+(node:50516) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 exit listeners added to [Bus]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+🚫 Non-recoverable disconnect detected.
+🚫 Another bot instance is already running.
+   Lock file: C:\projects\shopos\kiranabot\tokens\session-name\.bot.lock
+   Existing PID: 51416
+   Stop the other process before starting this one.
+⚠️ Recovered stale process lock file.
+🚫 Non-recoverable disconnect detected.
+   Another WhatsApp/Baileys session replaced this one (code 440).
+   1) Ensure only one bot process is running.
+   2) Do not run npm start and npm run dev at the same time.
+   3) Restart a single instance after other sessions are closed.
+^C^C

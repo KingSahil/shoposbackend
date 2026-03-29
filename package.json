@@ -1,0 +1,40 @@
+{
+  "name": "botwhatsapp",
+  "type": "module",
+  "version": "2.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "The First Open-Source AI Sales Agent for WhatsApp. Convert Natural Language to SQLite Orders instantly.",
+  "keywords": [
+    "whatsapp",
+    "chatbot",
+    "ai",
+    "llm",
+    "groq",
+    "natural-language-processing",
+    "nlp",
+    "ai-agent",
+    "ecommerce",
+    "sales-automation",
+    "conversational-ai",
+    "gpt",
+    "order-management"
+  ],
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --watch src --ext js,json --ignore tokens/** --ignore *.db --ignore *.db-* src/server.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "better-sqlite3": "^12.4.1",
+    "dotenv": "^16.4.7",
+    "firebase": "^12.11.0",
+    "groq-sdk": "^0.33.0",
+    "node-cron": "^4.2.1",
+    "pino": "^9.14.0",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
