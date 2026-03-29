@@ -33,6 +33,40 @@ export class NLOrderProcessor {
       return null;
     }
 
+    // --- 🔑 ADMIN FLOW ---
+    if (isAdmin) {
+      console.log(`🔑 Admin query detected from ${from}`);
+      
+      try {
+        // Fetch admin data from Firebase
+        const adminData = await fetchAdminSummaryData();
+        
+        // Call LLM to process admin query
+        const adminResponse = await parseAdminQuery(message, adminData);
+        
+        if (adminResponse) {
+          return {
+            handled: true,
+            response: `🔑 *ADMIN RESPONSE*\n━━━━━━━━━━━━━━━━\n\n${adminResponse}`
+          };
+        }
+        
+        // If LLM fails, provide a fallback
+        return {
+          handled: true,
+          response: `🔑 *ADMIN MODE*\n━━━━━━━━━━━━━━━━\n\nI'm your business assistant. Ask me about:\n\n📦 Inventory levels\n💰 Pending orders\n📊 Credit (Udhaar) balances\n📈 Sales summaries\n\nExample: "How many orders are pending?" or "Who has udhaar?"`
+        };
+      } catch (error) {
+        console.error('Admin query processing error:', error);
+        return {
+          handled: true,
+          response: `⚠️ *Error processing admin query.*\n\nPlease try again or check the logs.`
+        };
+      }
+    }
+
+    // --- 🛒 CUSTOMER FLOW ---
+
     // Skip if user is in certain stages where NL doesn't make sense
     // Stage 5 = talking to attendant
     if (state.stage >= 5) {

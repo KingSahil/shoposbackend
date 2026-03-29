@@ -47,11 +47,12 @@ export const stageFour = {
     });
 
     // 📝 Save to Udhaar if applicable
-    if (isUdhar) {
+    if (orderSuccess && isUdhar) {
       await saveUdharToFirebase({
         phone,
         customerName,
-        amount: totalAmount
+        amount: totalAmount,
+        items
       });
     }
 

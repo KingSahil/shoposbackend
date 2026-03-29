@@ -6,9 +6,9 @@ import {
   Browsers,
   fetchLatestBaileysVersion,
 } from "@whiskeysockets/baileys";
+import { createServer } from "node:http";
 import { rm, mkdir, readFile, unlink, open } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import { stages } from "./stages.js";
 import { getState, setState } from "./storage.js";
 import { startCronJobs } from "./cron_jobs.js";
@@ -17,16 +17,19 @@ import Pino from "pino";
 import qrcode from "qrcode-terminal";
 import { normalizePhoneNumber, extractPhoneFromJid } from './utils.js';
 import { getMenu } from './menu.js';
-import { updateBotStatusInFirebase, db } from './firebase_client.js';
-import { onSnapshot, doc, collectionGroup, getDocs, updateDoc, deleteDoc, setDoc } from 'firebase/firestore';
+import { updateBotStatusInFirebase, db, resolveStoreUserId } from './firebase_client.js';
+import { onSnapshot, doc, collection, query, where, updateDoc } from 'firebase/firestore';
+import { AUTH_PATH, DATA_DIR } from "./runtime_paths.js";
 
-const logger = Pino();
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const AUTH_PATH = resolve(__dirname, "../tokens/session-name");
 const LOCK_PATH = resolve(AUTH_PATH, ".bot.lock");
 const ALLOWED_PHONE_NUMBER = (process.env.ALLOWED_PHONE_NUMBER || "").replace(/\D/g, "");
 const ALLOWED_CHAT_JID = String(process.env.ALLOWED_CHAT_JID || "").trim();
 const ALLOW_FROM_ME = String(process.env.ALLOW_FROM_ME || "false").toLowerCase() === "true";
+const ADMIN_PHONE_NUMBER = (process.env.ADMIN_PHONE_NUMBER || "").replace(/\D/g, "");
+const HEALTH_PORT = Number.parseInt(
+  process.env.HEALTH_PORT || process.env.PORT || "3001",
+  10,
+);
 
 let client = null;
 let reconnectAttempts = 0;
@@ -37,6 +40,10 @@ let lockAcquired = false;
 let shuttingDown = false;
 let loggedMissingAllowedNumber = false;
 const loggedIgnoredReasons = new Set();
+const outboundQueueInFlight = new Set();
+let outboundQueueUnsubscribe = null;
+let botConnectionState = "starting";
+let healthServer = null;
 
 // Helper functions moved to utils.js
 
@@ -182,6 +189,13 @@ async function shutdownAndExit(code = 0) {
   shuttingDown = true;
 
   try {
+    outboundQueueUnsubscribe?.();
+    outboundQueueUnsubscribe = null;
+  } catch {
+    // Ignore unsubscribe errors during shutdown.
+  }
+
+  try {
     if (client) {
       client.end();
       client = null;
@@ -190,8 +204,60 @@ async function shutdownAndExit(code = 0) {
     // Ignore close errors during shutdown.
   }
 
+  try {
+    await new Promise((resolve, reject) => {
+      if (!healthServer) {
+        resolve();
+        return;
+      }
+
+      healthServer.close((error) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve();
+      });
+    });
+  } catch {
+    // Ignore HTTP server close errors during shutdown.
+  }
+
   await releaseProcessLock();
   process.exit(code);
+}
+
+function startHealthServer() {
+  if (healthServer) {
+    return;
+  }
+
+  healthServer = createServer((req, res) => {
+    if (req.url !== "/" && req.url !== "/health" && req.url !== "/healthz") {
+      res.writeHead(404, { "content-type": "application/json" });
+      res.end(JSON.stringify({ ok: false, error: "not_found" }));
+      return;
+    }
+
+    const isOnline = botConnectionState === "open";
+    const statusCode = botConnectionState === "closed" ? 503 : 200;
+
+    res.writeHead(statusCode, { "content-type": "application/json" });
+    res.end(
+      JSON.stringify({
+        ok: isOnline,
+        connection: botConnectionState,
+        dataDir: DATA_DIR,
+        authPath: AUTH_PATH,
+        botJid: client?.user?.id || null,
+      }),
+    );
+  });
+
+  healthServer.listen(HEALTH_PORT, "0.0.0.0", () => {
+    console.log(`🌐 Health server listening on port ${HEALTH_PORT}`);
+  });
 }
 
 function wait(ms) {
@@ -270,7 +336,109 @@ async function scheduleReconnect() {
   }
 }
 
+function formatOutboundWhatsAppJid(rawPhone) {
+  const digits = normalizePhoneNumber(rawPhone);
+  if (!digits) {
+    return null;
+  }
+
+  // Default 10-digit local numbers to India country code for this deployment.
+  const normalized = digits.length === 10 ? `91${digits}` : digits;
+  return `${normalized}@s.whatsapp.net`;
+}
+
+async function setupOutboundWhatsAppQueueListener() {
+  if (outboundQueueUnsubscribe) {
+    return;
+  }
+
+  const userId = await resolveStoreUserId();
+  if (!userId) {
+    console.warn("No store userId found for outbound WhatsApp queue.");
+    return;
+  }
+
+  const queueRef = collection(db, `users/${userId}/whatsapp_messages`);
+  const pendingQueue = query(queueRef, where('status', '==', 'pending'));
+
+  outboundQueueUnsubscribe = onSnapshot(pendingQueue, async (snapshot) => {
+    for (const change of snapshot.docChanges()) {
+      if (change.type !== 'added' && change.type !== 'modified') {
+        continue;
+      }
+
+      const messageId = change.doc.id;
+      if (outboundQueueInFlight.has(messageId)) {
+        continue;
+      }
+
+      const payload = change.doc.data() || {};
+      const targetJid = formatOutboundWhatsAppJid(payload.to);
+      const text = String(payload.message || '').trim();
+
+      if (!targetJid) {
+        outboundQueueInFlight.add(messageId);
+        try {
+          await updateDoc(change.doc.ref, {
+            status: 'failed',
+            error: 'Missing or invalid phone number',
+            failedAt: new Date().toISOString(),
+          });
+        } finally {
+          outboundQueueInFlight.delete(messageId);
+        }
+        continue;
+      }
+
+      if (!text) {
+        outboundQueueInFlight.add(messageId);
+        try {
+          await updateDoc(change.doc.ref, {
+            status: 'failed',
+            error: 'Message body is empty',
+            failedAt: new Date().toISOString(),
+          });
+        } finally {
+          outboundQueueInFlight.delete(messageId);
+        }
+        continue;
+      }
+
+      if (!client) {
+        continue;
+      }
+
+      outboundQueueInFlight.add(messageId);
+
+      try {
+        console.log(`📤 Sending queued WhatsApp message ${messageId} to ${targetJid}`);
+        await client.sendMessage(targetJid, { text });
+        await updateDoc(change.doc.ref, {
+          status: 'sent',
+          sentAt: new Date().toISOString(),
+          sentVia: client.user?.id || null,
+          error: null,
+        });
+      } catch (error) {
+        console.error(`❌ Failed to send queued WhatsApp message ${messageId}:`, error);
+        await updateDoc(change.doc.ref, {
+          status: 'failed',
+          failedAt: new Date().toISOString(),
+          error: error?.message || String(error),
+        });
+      } finally {
+        outboundQueueInFlight.delete(messageId);
+      }
+    }
+  }, (error) => {
+    console.error("Error listening to outbound WhatsApp queue:", error);
+  });
+
+  console.log(`📬 Outbound WhatsApp queue listener ready for users/${userId}/whatsapp_messages`);
+}
+
 async function start() {
+  botConnectionState = "connecting";
   const { state, saveCreds } = await useMultiFileAuthState(
     AUTH_PATH
   );
@@ -301,10 +469,8 @@ async function start() {
   // 📡 Listen for remote commands (like logout/unlink)
   setTimeout(async () => {
     try {
-      const inventoryGroupRef = collectionGroup(db, 'inventory');
-      const inventorySnap = await getDocs(inventoryGroupRef);
-      if (!inventorySnap.empty) {
-        const userId = inventorySnap.docs[0].ref.path.split('/')[1];
+      const userId = await resolveStoreUserId();
+      if (userId) {
         const botStatusRef = doc(db, `users/${userId}/bot/status`);
         
         onSnapshot(botStatusRef, async (snapshot) => {
@@ -335,6 +501,7 @@ async function start() {
     const { qr, connection, lastDisconnect, isOnline } = update;
 
       if (qr) {
+        botConnectionState = "waiting-for-scan";
         console.log("\n\n████████████████████████████████████████");
         console.log("👇👇👇 SCAN THIS QR CODE 👇👇👇");
         console.log("████████████████████████████████████████\n");
@@ -346,15 +513,23 @@ async function start() {
       }
 
       if (connection === "open") {
+        botConnectionState = "open";
         reconnectAttempts = 0;
         console.log("\n✅✅✅ WhatsApp connection is OPEN! ✅✅✅\n");
         updateBotStatusInFirebase({ qr: null, connection: "open", isOnline: true });
+        await setupOutboundWhatsAppQueueListener();
+        
         if (ALLOWED_PHONE_NUMBER) {
-          console.log(`🔒 Message whitelist active for: ${ALLOWED_PHONE_NUMBER}`);
-        } else if (ALLOWED_CHAT_JID) {
-          console.log(`🔒 Message whitelist active for chat: ${ALLOWED_CHAT_JID}`);
-        } else {
-          console.warn("⚠️ ALLOWED_PHONE_NUMBER is not set. Incoming messages will be ignored.");
+          console.log(`🔒 Customer whitelist active for: ${ALLOWED_PHONE_NUMBER}`);
+        }
+        if (ADMIN_PHONE_NUMBER) {
+          console.log(`� Admin whitelist active for: ${ADMIN_PHONE_NUMBER}`);
+        }
+        if (ALLOWED_CHAT_JID) {
+          console.log(`🔒 Chat whitelist active for: ${ALLOWED_CHAT_JID}`);
+        }
+        if (!ALLOWED_PHONE_NUMBER && !ADMIN_PHONE_NUMBER && !ALLOWED_CHAT_JID) {
+          console.warn("⚠️ No whitelist configured. Incoming messages will be ignored.");
         }
         if (ALLOW_FROM_ME) {
           console.warn("⚠️ ALLOW_FROM_ME is enabled. Use only for testing to avoid accidental loops.");
@@ -367,6 +542,7 @@ async function start() {
       }
 
       if (connection === "close") {
+        botConnectionState = "closed";
         const statusCode = getDisconnectCode(lastDisconnect);
         const reason = getDisconnectReason(statusCode);
 
@@ -397,7 +573,7 @@ async function start() {
             console.log("🔄 Attempting proactive reconnection with fresh session...");
             // Small delay to ensure files are cleared
             setTimeout(() => {
-              connectToWhatsApp().catch(err => {
+              start().catch(err => {
                 console.error("❌ Proactive reconnection failed:", err.message);
                 shutdownAndExit(1);
               });
@@ -425,8 +601,25 @@ async function start() {
         // Is this a self-chat (typing to myself)?
         const isSelfChat = isFromMe && (remotePhone === botNumber);
         
-        if (isFromMe && !isSelfChat && !ALLOW_FROM_ME) {
-            // This is a message sent by the bot to a client. IGNORE to avoid loops.
+        // Check if the sender (even in self-chat) is the admin
+        const senderIsAdmin = Boolean(ADMIN_PHONE_NUMBER && remotePhone === ADMIN_PHONE_NUMBER);
+        
+        // IGNORE messages sent by the bot UNLESS it's a self-chat from the admin
+        // When admin types to themselves, fromMe=true but we still want to process it
+        // However, we need to distinguish between:
+        // 1. Admin typing a NEW message (process it)
+        // 2. Bot's reply appearing in the chat (ignore it)
+        // 
+        // The key is: if it's fromMe AND the message.key.participant exists,
+        // it means the bot sent it (not the user typing in self-chat)
+        const isBotReply = isFromMe && !isSelfChat;
+        
+        if (isBotReply && !ALLOW_FROM_ME) {
+            continue;
+        }
+        
+        // For self-chat admin: only process if it's actually from admin
+        if (isSelfChat && !senderIsAdmin) {
             continue;
         }
 
@@ -437,6 +630,27 @@ async function start() {
 
         if (!from) {
           logIgnoredReasonOnce("missing remoteJid");
+          continue;
+        }
+
+        // 🛡️ CRITICAL: Ignore bot's own responses to prevent loops
+        // Bot responses always start with these patterns
+        const botResponsePatterns = [
+          '🔑 *ADMIN RESPONSE*',
+          '🔑 *ADMIN MODE*',
+          '🌟 *OUR CATALOG*',
+          '📝 *ORDER DRAFT*',
+          '✅ *Draft Confirmed*',
+          '🗑️ *Draft cleared*',
+          '✅ *Order Cancelled*',
+          '⚠️ *Item match failed*',
+          '⚠️ *Error processing',
+        ];
+        
+        const isBotResponse = botResponsePatterns.some(pattern => text.startsWith(pattern));
+        
+        if (isBotResponse) {
+          console.log(`🛡️ Ignoring bot's own response to prevent loop`);
           continue;
         }
 
@@ -455,20 +669,23 @@ async function start() {
           continue;
         }
 
-        if (!ALLOWED_PHONE_NUMBER && !ALLOWED_CHAT_JID) {
+        if (!ALLOWED_PHONE_NUMBER && !ALLOWED_CHAT_JID && !ADMIN_PHONE_NUMBER) {
           if (!loggedMissingAllowedNumber) {
             loggedMissingAllowedNumber = true;
-            console.warn("⚠️ Ignoring all incoming messages until ALLOWED_PHONE_NUMBER or ALLOWED_CHAT_JID is configured.");
+            console.warn("⚠️ Ignoring all incoming messages until ALLOWED_PHONE_NUMBER, ADMIN_PHONE_NUMBER, or ALLOWED_CHAT_JID is configured.");
           }
           continue;
         }
 
         const senderPhone = extractPhoneFromJid(from);
 
-        // Strict whitelist: Only ALLOWED_PHONE_NUMBER or ALLOWED_CHAT_JID or self-chat
+        // Check if this message is from the admin
+        const isAdmin = Boolean(ADMIN_PHONE_NUMBER && senderPhone === ADMIN_PHONE_NUMBER);
+
+        // Whitelist: ALLOWED_PHONE_NUMBER, ADMIN_PHONE_NUMBER, or ALLOWED_CHAT_JID
         const isWhitelisted = Boolean(
-          isSelfChat || 
           (ALLOWED_PHONE_NUMBER && senderPhone === ALLOWED_PHONE_NUMBER) ||
+          (ADMIN_PHONE_NUMBER && senderPhone === ADMIN_PHONE_NUMBER) ||
           (ALLOWED_CHAT_JID && from === ALLOWED_CHAT_JID)
         );
 
@@ -477,11 +694,7 @@ async function start() {
           continue;
         }
 
-        // ❌ ADMIN ACCESS REMOVED - Treat everyone as a customer
-        const isAdmin = false;
-
-        console.log(`📡 Message from ${from}: isFromMe=${isFromMe}, isSelfChat=${isSelfChat}, isAdmin=${isAdmin}`);
-        console.log(`   senderPhone: ${senderPhone}, allowed: ${ALLOWED_PHONE_NUMBER}, bot: ${botNumber} (${botJid})`);
+        console.log(`📡 Message from ${from}: ${text.substring(0, 50)}...`);
 
         if (!text) {
           logIgnoredReasonOnce("empty text payload", from);
@@ -588,6 +801,7 @@ async function start() {
 process.setMaxListeners(15);
 
 async function bootstrap() {
+  startHealthServer();
   const lockReady = await acquireProcessLock();
   if (!lockReady) {
     process.exit(1);

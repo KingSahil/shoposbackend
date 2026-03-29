@@ -8,7 +8,7 @@ KiranaBot is the WhatsApp automation service for KiranaKeeper. It connects to Wh
 - Restricts inbound handling to an allowed admin number or chat
 - Loads inventory from Firebase and exposes it as the current menu
 - Accepts both stage-based flows and Groq-powered natural language ordering
-- Supports admin/business questions when the sender is the allowed admin
+- **NEW: Admin Mode** - When messages come from the configured admin number, provides business analytics instead of customer ordering
 - Stores per-chat state in `botwhatsapp.db`
 - Sends abandoned-cart nudges every 10 minutes for carts idle over 1 hour
 - Syncs orders, inventory changes, udhaar entries, and bot status to Firestore
@@ -62,6 +62,7 @@ Required for practical use:
 
 Optional:
 
+- `ADMIN_PHONE_NUMBER`: your business phone number (digits only) - enables admin mode for business queries
 - `ALLOWED_CHAT_JID`: exact WhatsApp JID allowed to trigger the bot
 - `GROQ_MODEL`: defaults to `llama-3.3-70b-versatile`
 - `ALLOW_FROM_ME`: set to `true` only for testing self-sent messages
@@ -128,6 +129,7 @@ Avoid purely serverless hosting unless you first redesign session and database s
 
 ## Related docs
 
+- [ADMIN_FEATURE.md](C:/projects/kiranaKeeper/kiranabot/ADMIN_FEATURE.md) - **NEW: Admin mode documentation**
 - [CODE_EXPLANATION.md](C:/projects/kiranaKeeper/kiranabot/CODE_EXPLANATION.md)
 - [QUICK_REFERENCE.md](C:/projects/kiranaKeeper/kiranabot/QUICK_REFERENCE.md)
 - [TROUBLESHOOTING.md](C:/projects/kiranaKeeper/kiranabot/TROUBLESHOOTING.md)
