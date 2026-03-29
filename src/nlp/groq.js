@@ -222,13 +222,30 @@ export async function parseAdminQuery(userMessage, storeData) {
     return null;
   }
 
+  const formatOrderItemNames = (order) => {
+    if (Array.isArray(order?.items) && order.items.length > 0) {
+      const itemNames = order.items
+        .map((item) => String(item?.description || item?.name || '').trim())
+        .filter(Boolean);
+
+      if (itemNames.length > 0) {
+        return itemNames.join(', ');
+      }
+    }
+
+    return String(order?.name || '').trim() || 'Unnamed Order';
+  };
+
+  const formatInventoryItemName = (item) =>
+    String(item?.name || item?.description || '').trim() || 'Unnamed Item';
+
   // Format data for context
   const ordersSummary = storeData.orders.map(o => 
-    `- Order ${o.id}: ${o.customer}, Amount: ₹${o.amount}, Status: ${o.status}, Date: ${o.date}, Phone: ${o.phone}`
+    `- Order ${o.id}: ${formatOrderItemNames(o)} | Customer: ${o.customer}, Amount: ₹${o.amount}, Status: ${o.status}, Date: ${o.date}, Phone: ${o.phone || 'N/A'}`
   ).join('\n');
 
   const inventorySummary = storeData.inventory.map(i => 
-    `- ${i.name} (SKU: ${i.sku}): Price ₹${i.unitPrice}, Stock: ${i.stock}`
+    `- ${formatInventoryItemName(i)} (SKU: ${i.sku || 'N/A'}): Price ₹${i.unitPrice ?? i.price ?? 0}, Stock: ${i.stock ?? 0}`
   ).join('\n');
 
   const udharSummary = storeData.udhar.map(u => 
@@ -255,6 +272,8 @@ YOUR TASK:
 - Use a professional yet friendly "shopkeeper" tone.
 - Be concise but helpful.
 - If they ask for a list (like "who has udhaar"), provide a clear, bulleted list.
+- If you list sales, orders, or inventory items, always include the product/item name. Do not show only IDs.
+- When mentioning an order, prefer this format: "Order <ID> - <item name>".
 - If they ask for totals (like "how many orders are pending"), calculate it correctly.
 - If you don't find the answer in the data, say so politely.
 - Use Hinglish (Hindi + English) where appropriate as the shopkeeper is likely Indian.

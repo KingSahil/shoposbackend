@@ -67,10 +67,15 @@ function normalizeInventoryItem(item) {
   const id = String(item.id || item.sku || item.name || '').trim();
   if (!id) return null;
 
+  const resolvedName = String(item.name || item.description || '').trim() || 'Unnamed Item';
+  const resolvedUnitPrice = Number(item.unitPrice || item.price || 0) || 0;
+
   return {
     id,
-    description: String(item.name || item.description || '').trim() || 'Unnamed Item',
-    price: Number(item.unitPrice || item.price || 0) || 0,
+    name: resolvedName,
+    description: resolvedName,
+    price: resolvedUnitPrice,
+    unitPrice: resolvedUnitPrice,
     stock: Math.max(0, Number(item.stock || 0)),
     sku: String(item.sku || item.code || '').trim(),
   };
