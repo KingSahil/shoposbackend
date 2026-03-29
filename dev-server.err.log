@@ -589,4 +589,3 @@ Node.js v25.2.1
    1) Ensure only one bot process is running.
    2) Do not run npm start and npm run dev at the same time.
    3) Restart a single instance after other sessions are closed.
-^C^C

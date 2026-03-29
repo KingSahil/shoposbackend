@@ -36,13 +36,11 @@ Steps:
 
 1. push `kiranabot` to GitHub
 2. create a Railway project from the repo
-3. set the service root directory to `kiranabot`
-4. Railway will use the included `Dockerfile`
-5. add environment variables from `.env`
-6. set `DATA_DIR=/data`
-7. attach a persistent volume
-8. mount the volume at `/data` so `tokens/` and `botwhatsapp.db` survive restarts
-9. deploy and scan the QR from logs
+3. set the start command to `npm start`
+4. add environment variables from `.env`
+5. attach a persistent volume
+6. mount the volume so `tokens/` and `botwhatsapp.db` survive restarts
+7. deploy and scan the QR from logs
 
 ## VPS with PM2
 

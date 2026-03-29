@@ -1,8 +1,0 @@
-node_modules
-.env
-tokens
-*.db
-*.db-shm
-*.db-wal
-dev-server.err.log
-dev-server.out.log
